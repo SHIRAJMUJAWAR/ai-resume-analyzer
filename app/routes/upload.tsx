@@ -42,6 +42,7 @@ import { prepareInstructions } from '~/constants';
             feedback: '',
         }
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
+                console.log( data);
 
         setStatusText('Analyzing...');
 
@@ -50,12 +51,23 @@ import { prepareInstructions } from '~/constants';
             prepareInstructions({ jobTitle, jobDescription })
         )
         if (!feedback) return setStatusText('Error: Failed to analyze resume');
+        console.log(feedback);
+        
 
         const feedbackText = typeof feedback.message.content === 'string'
             ? feedback.message.content
             : feedback.message.content[0].text;
 
-        data.feedback = JSON.parse(feedbackText);
+        let parsedFeedback;
+        try {
+            parsedFeedback = JSON.parse(feedbackText);
+        } catch (e) {
+            setStatusText('Error: AI response was not valid JSON. Please try again.');
+            console.error('Invalid JSON from AI:', feedbackText, e);
+            return;
+        }
+
+        data.feedback = parsedFeedback;
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
         setStatusText('Analysis complete, redirecting...');
         console.log(data);
