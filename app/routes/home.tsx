@@ -65,14 +65,13 @@ useEffect(() => {
           <img src="/images/resume-scan-2.gif" className="w-[200px]" />
         </div>
        )}
-
-      { !loadingResume && resumes.length > 0 && (
+ 
          <div className="resumes-section">
           {resumes.map((resume) => (
                 <Resumecard key={resume.id} resume={resume}/>
           ))}
         </div>
-    )}
+    
 
       { !loadingResume && resumes?.length === 0 && (
         <div className="flex flex-col items-center justify-center mt-10 gap-4">
@@ -83,7 +82,12 @@ useEffect(() => {
       )}
  
    </section>
-    
+    <img 
+  src="public\images\shiajlodo1.jpg" 
+  alt="Description" 
+  className="mt-20 h-10 mr-0.5 mb-1.5 w-[100px] rounded-4xl border border-black   p-1  
+  object-cover"
+/>
   </main>
 
         }

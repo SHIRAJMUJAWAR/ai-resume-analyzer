@@ -355,7 +355,7 @@ if (!isSignedIn) {
           ],
         },
       ],
-      { model: "gpt-5-nano" }
+      { model: "gpt-4o-mini" }
     ) as Promise<AIResponse | undefined>;
   };
 
